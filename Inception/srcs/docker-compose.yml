@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./requirements/nginx/.
+    image: nginx
+    container_name: nginx
+    ports:
+      - '443:443'
+    restart: on-failure
+    networks:
+      - inception
+    env_file:
+      - .env
+    volumes:
+      - wordpress_files:/var/www/
+  mariadb:
+    build: ./requirements/mariadb/.
+    image: mariadb
+    container_name: mariadb
+    restart: on-failure
+    networks:
+      - inception
+    volumes:
+      - wordpress_db:/var/lib/mysql
+    env_file:
+      - .env
+  wordpress:
+    build: ./requirements/wordpress/.
+    image: wordpress
+    container_name: wordpress
+    ports:
+      - '9000:9000'
+    networks:
+      - inception
+    volumes:
+      - wordpress_files:/var/www/
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+  site:
+    build: ./requirements/bonus/site/.
+    image: shonjmoj
+    container_name: shonjmoj
+    ports:
+      - '3000:3000'
+    restart: on-failure
+    networks:
+      - inception
+
+volumes:
+  wordpress_db:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $HOME/data/wordpress_db
+  wordpress_files:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $HOME/data/wordpress_files
+
+networks:
+  inception:
