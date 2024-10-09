@@ -1,8 +1,5 @@
 all : 
-	cd ./srcs/ && docker compose up -d --build nginx mariadb wordpress
-
-bonus : all
-	cd ./srcs/ && docker compose up -d --build site
+	cd ./srcs/ && docker compose up -d 
 
 stop :
 	cd ./srcs/ && docker compose down

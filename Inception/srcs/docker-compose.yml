@@ -39,15 +39,6 @@ services:
       - .env
     depends_on:
       - mariadb
-  site:
-    build: ./requirements/bonus/site/.
-    image: shonjmoj
-    container_name: shonjmoj
-    ports:
-      - '3000:3000'
-    restart: on-failure
-    networks:
-      - inception
 
 volumes:
   wordpress_db:
@@ -55,13 +46,13 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: $HOME/data/wordpress_db
+      device: /home/vagrant/data/wordpress_db
   wordpress_files:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: $HOME/data/wordpress_files
+      device: /home/vagrant/data/wordpress_files
 
 networks:
   inception:
