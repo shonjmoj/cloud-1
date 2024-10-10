@@ -5,22 +5,10 @@
   tasks:
     - name: Copy Inception folder to remote
       copy:
-        src: ../Inception
+        src: ../inception
         dest: .
-
-    - name: Create volume folders
-      file:
-        path: "data/{{ item }}"
-        state: directory
-        owner: "{{ ansible_user }}"
-        recurse: yes
-        mode: '0755'
-      with_items:
-        - "wordpress_db"
-        - "wordpress_files"
 
     - name: Run Inception
       shell: |
-        cd Inception/
-        make clean
-        make
+        cd inception/
+        make clean_volumes clean re
