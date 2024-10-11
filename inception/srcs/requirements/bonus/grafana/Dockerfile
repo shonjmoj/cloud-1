@@ -6,6 +6,7 @@ RUN cd /tmp && wget https://dl.grafana.com/enterprise/release/grafana-enterprise
 COPY ./srcs/supervisord.conf /etc
 COPY ./srcs/telegraf.conf /etc
 COPY ./srcs/grafana.db /grafana/data/
+COPY ./srcs/defaults.ini /grafana/conf/
 
 CMD /usr/bin/supervisord -c /etc/supervisord.conf
 
