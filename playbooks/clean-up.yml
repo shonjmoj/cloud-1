@@ -1,0 +1,8 @@
+- name: Clean up
+  hosts: hosts
+  become: true
+  tasks:
+    - name: Shutdown running container
+      shell: |
+        cd inception
+        make clean

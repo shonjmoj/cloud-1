@@ -3,7 +3,7 @@
   hosts: hosts
   become: true
   tasks:
-    - name: Update package cache
+    - name: Update system
       apt:
         update_cache: yes
 
