@@ -11,4 +11,4 @@
     - name: Run Inception
       shell: |
         cd inception/
-        make clean_volumes clean re
+        make re
