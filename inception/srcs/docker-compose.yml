@@ -23,6 +23,17 @@ services:
         networks:
             - inception
         restart: always
+    phpmyadmin:
+        container_name: "phpmyadmin"
+        build: ./requirements/phpmyadmin
+        image: phpmyadmin
+        env_file:
+            - .env
+        volumes:
+            - site-files:/var/www
+        networks:
+            - inception
+        restart: always
     mariadb:
         container_name: "mariadb"
         build: ./requirements/mariadb
