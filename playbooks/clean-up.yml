@@ -6,3 +6,4 @@
       shell: |
         cd inception
         make clean
+        docker system prune -af

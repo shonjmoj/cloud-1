@@ -7,7 +7,9 @@
       copy:
         src: ../inception
         dest: .
-
+      tags:
+      - copy
+      
     - name: Run Inception
       shell: |
         cd inception/
