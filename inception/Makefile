@@ -12,12 +12,7 @@
 
 DOCKER-COMPOSE-FILE = ./srcs/docker-compose.yml
 
-make: folders build run
-
-folders:
-	mkdir -pv ~/data/site-files
-	mkdir -pv ~/data/database
-	mkdir -pv ~/data/influxdb
+make: build run
 	
 build:
 	cd srcs && docker compose build
