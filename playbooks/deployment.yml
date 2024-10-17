@@ -22,12 +22,6 @@
         - influxdb
       tags:
         - volumes
-
-    - name: Edit DOMAIN ENV value
-      lineinfile:
-        path: /{{ ansible_user }}/inception/srcs/.env
-        regexp: '^DOMAIN='
-        line: "DOMAIN={{ hostvars[inventory_hostname]['ansible_eth1']['ipv4']['address'] }}"
       
     - name: Run Inception
       shell: |
