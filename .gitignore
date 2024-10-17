@@ -1,2 +1,3 @@
 .ssh_env
 .vagrant
+.env
