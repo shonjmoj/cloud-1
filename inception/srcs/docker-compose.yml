@@ -1,146 +1,146 @@
 services:
-    nginx:
-        container_name: "nginx"
-        build: ./requirements/nginx
-        image: nginx
-        ports:
-            - "443:443"
-        env_file:
-            - .env
-        volumes:
-            - site-files:/var/www
-        networks:
-            - inception
-        restart: always
-    wordpress:
-        container_name: "wordpress"
-        build: ./requirements/wordpress
-        image: wordpress
-        env_file:
-            - .env
-        volumes:
-            - site-files:/var/www
-        networks:
-            - inception
-        restart: always
-    phpmyadmin:
-        container_name: "phpmyadmin"
-        build: ./requirements/phpmyadmin
-        image: phpmyadmin
-        env_file:
-            - .env
-        volumes:
-            - site-files:/var/www
-        networks:
-            - inception
-        restart: always
-    mariadb:
-        container_name: "mariadb"
-        build: ./requirements/mariadb
-        image: mariadb
-        env_file:
-            - .env
-        volumes:
-            - database:/var/lib/mysql
-        networks:
-            - inception
-        restart: always
-    ftp:
-        container_name: "ftp"
-        build: ./requirements/bonus/ftp
-        image: ftp
-        ports:
-            - "21:21"
-            - "30000:30000"
-        env_file:
-            - .env
-        volumes:
-            - site-files:/home/iounejja
-        networks:
-            - inception
-        restart: always
-    redis:
-        container_name: redis
-        build: ./requirements/bonus/redis
-        image: redis
-        env_file:
-            - .env
-        networks:
-            - inception
-        restart: always
-    adminer:
-        container_name: adminer
-        build: ./requirements/bonus/adminer
-        image: adminer
-        env_file:
-            - .env
-        volumes:
-            - site-files:/var/www
-        networks:
-            - inception
-        restart: always
-    grafana:
-        container_name: grafana
-        build: ./requirements/bonus/grafana
-        image: grafana
-        env_file:
-            - .env
-        volumes:
-            - site-files:/grafana
-        ports:
-            - "3000:3000"
-        networks:
-            - inception
-        restart: always
-    influxdb:
-        container_name: influxdb
-        build: ./requirements/bonus/influxdb
-        image: influxdb
-        volumes:
-            - influxdb:/var/lib/influxdb/data/collectd
-        networks:
-            - inception
-        restart: always
-    website:
-        container_name: website
-        build: ./requirements/bonus/website
-        image: website
-        ports:
-            - 5000:5000
-        env_file:
-            - .env
-        volumes:
-            - site-files:/var/www
-        networks:
-            - inception
-        restart: always
+  nginx:
+    container_name: "nginx"
+    build: ./requirements/nginx
+    image: nginx
+    ports:
+      - "443:443"
+    env_file:
+      - .env
+    volumes:
+      - site-files:/var/www
+    networks:
+      - inception
+    restart: always
+  wordpress:
+    container_name: "wordpress"
+    build: ./requirements/wordpress
+    image: wordpress
+    env_file:
+      - .env
+    volumes:
+      - site-files:/var/www
+    networks:
+      - inception
+    restart: always
+  phpmyadmin:
+    container_name: "phpmyadmin"
+    build: ./requirements/phpmyadmin
+    image: phpmyadmin
+    env_file:
+      - .env
+    volumes:
+      - site-files:/var/www
+    networks:
+      - inception
+    restart: always
+  mariadb:
+    container_name: "mariadb"
+    build: ./requirements/mariadb
+    image: mariadb
+    env_file:
+      - .env
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
+  ftp:
+    container_name: "ftp"
+    build: ./requirements/bonus/ftp
+    image: ftp
+    ports:
+      - "21:21"
+      - "30000:30000"
+    env_file:
+      - .env
+    volumes:
+      - site-files:/home/iounejja
+    networks:
+      - inception
+    restart: always
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis
+    image: redis
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer
+    image: adminer
+    env_file:
+      - .env
+    volumes:
+      - site-files:/var/www
+    networks:
+      - inception
+    restart: always
+  grafana:
+    container_name: grafana
+    build: ./requirements/bonus/grafana
+    image: grafana
+    env_file:
+      - .env
+    volumes:
+      - grafana:/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - inception
+    restart: always
+  influxdb:
+    container_name: influxdb
+    build: ./requirements/bonus/influxdb
+    image: influxdb
+    volumes:
+      - influxdb:/var/lib/influxdb/data/collectd
+    networks:
+      - inception
+    restart: always
+  website:
+    container_name: website
+    build: ./requirements/bonus/website
+    image: website
+    ports:
+      - 5000:5000
+    env_file:
+      - .env
+    volumes:
+      - site-files:/var/www
+    networks:
+      - inception
+    restart: always
 
 volumes:
-    site-files:
-        driver: local
-        driver_opts:
-            type: 'none'
-            o: 'bind'
-            device: ${HOME}/data/site-files
-    database:
-        driver: local
-        driver_opts:
-            type: 'none'
-            o: 'bind'
-            device: ${HOME}/data/database
-    grafana:
-        driver: local
-        driver_opts:
-            type: 'none'
-            o: 'bind'
-            device: ${HOME}/data/grafana
-    influxdb:
-        driver: local
-        driver_opts:
-            type: 'none'
-            o: 'bind'
-            device: ${HOME}/data/influxdb
+  site-files:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: ${HOME}/data/site-files
+  database:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: ${HOME}/data/database
+  grafana:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: ${HOME}/data/grafana
+  influxdb:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: ${HOME}/data/influxdb
 
 networks:
-    inception:
-        name: "inception"
+  inception:
+    name: "inception"

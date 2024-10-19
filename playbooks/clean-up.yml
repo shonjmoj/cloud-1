@@ -5,5 +5,6 @@
     - name: Shutdown running container
       shell: |
         cd inception
-        make clean
+        make clean clean_volumes
+        cd .. && rm -rf inception data
         docker system prune -af
