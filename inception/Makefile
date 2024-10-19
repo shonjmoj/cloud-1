@@ -13,7 +13,7 @@
 DOCKER-COMPOSE-FILE = ./srcs/docker-compose.yml
 
 make: build run
-	
+
 build:
 	cd srcs && docker compose build
 
@@ -33,5 +33,6 @@ clean_volumes:
 	sudo rm -rf ~/data/database/*
 	sudo rm -rf ~/data/site-files/*
 	sudo rm -rf ~/data/influxdb/*
+	sudo rm -rf ~/data/grafana/*
 
 re: down build run

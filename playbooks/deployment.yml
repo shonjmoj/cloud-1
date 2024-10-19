@@ -15,13 +15,19 @@
         path: "./data/{{ item }}"
         state: directory
         recurse: true
-        owner: "{{ ansible_user }}"
       with_items:
         - database
         - site-files
         - influxdb
+        - grafana
       tags:
         - volumes
+
+    - name: Edit DOMAIN ENV value
+      lineinfile:
+        path: /{{ ansible_user }}/inception/srcs/.env
+        regexp: '^DOMAIN='
+        line: "DOMAIN={{ inventory_hostname }}"
       
     - name: Run Inception
       shell: |

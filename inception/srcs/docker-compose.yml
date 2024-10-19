@@ -85,6 +85,8 @@ services:
         image: grafana
         env_file:
             - .env
+        volumes:
+            - site-files:/grafana
         ports:
             - "3000:3000"
         networks:
@@ -126,6 +128,12 @@ volumes:
             type: 'none'
             o: 'bind'
             device: ${HOME}/data/database
+    grafana:
+        driver: local
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: ${HOME}/data/grafana
     influxdb:
         driver: local
         driver_opts:
